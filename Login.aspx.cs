@@ -24,7 +24,8 @@ public partial class Login : System.Web.UI.Page
     protected void btnLogin_Click(object sender, EventArgs e)
     {
 
-        if (this.txtUserName.Text == "Admin1" || this.txtUserName.Text == "Admin2" || this.txtUserName.Text == "Admin3")
+        if (this.txtUserName.Text == "Admin1"
+            )
         {
 
             if (this.txtPass.Value.Equals("Admin123456"))
