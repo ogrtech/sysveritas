@@ -222,7 +222,7 @@ desired effect
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <li>
-                            <a href="outlogin.aspx"><i class="fa fa-lock"></i>Cerrar Sessión</a>
+                            <a href="outlogin.aspx"><i class="fa fa-lock">&nbsp;</i>Cerrar Sessión</a>
                         </li>
                     </ul>
                 </div>
