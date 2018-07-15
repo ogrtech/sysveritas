@@ -275,6 +275,17 @@ desired effect
                             <li><a href="#"><i class="fa fa-circle-o"></i>Donantes Persona</a></li>
                         </ul>
                     </li>
+                    <li class=" active treeview">
+                        <a href="#"><i class="fa fa-book"></i><span>Correos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="correos/index.aspx"><i class="fa fa-circle-o"></i>Correos</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Donantes Persona</a></li>
+                        </ul>
+                    </li>
                     <li class="active"><a href="#"><i class="fa fa-envelope"></i><span>Correspondencia</span></a></li>
                     <li class="active"><a href="#"><i class="fa fa-address-card-o"></i><span>Resportes</span></a></li>
                     <li><a href="outlogin.aspx"><i class="fa fa-lock"></i><span>Cerrar Sessión</span></a></li>
