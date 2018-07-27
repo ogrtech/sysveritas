@@ -26,7 +26,7 @@
 <body>
     <div class="box">
         <div class="box-header">
-            <button type="button" class="btn btn-success" onclick="location='add.aspx'">Nuevo Correo</button>
+            <button type="button" class="btn btn-success" onclick="location='addCorreo.aspx'">Nuevo Correo</button>
         </div>
         <!-- /.box-header -->
         <div class="box-body" id="contenido" runat="server">

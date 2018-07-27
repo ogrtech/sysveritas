@@ -4,93 +4,123 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
+using Entidades;
 
 /// <summary>
 /// Descripción breve de CorreoDA
 /// </summary>
-public class CorreoDAL
+namespace DAL
 {
-    public CorreoDAL()
+    public class CorreoDAL
     {
-        //
-        // TODO: Agregar aquí la lógica del constructor
-        //
-    }
+        //public CorreoDAL()
+        //{
+        //    //
+        //    // TODO: Agregar aquí la lógica del constructor
+        //    //
+        //}
 
-    public string BuscarAllCorreos()
-    {
-        string jsonStr = null;
-        var respuesta = new object();
-        List<object> list = new List<object>();
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnVeritas"].ToString());
-        string sql = "SELECT idCorreo,destino,sujeto,contenido,Estado_Correo.idEstadoCorreo,Estado_Correo.estadoCorreo,fechaRegistro,idUsuario FROM CORREOS inner join Estado_Correo on CORREOS.idEstadoCorreo = Estado_Correo.idEstadoCorreo order by fechaRegistro desc";
-        SqlCommand cmd = new SqlCommand(sql, conn);
-        SqlDataReader mydr = null;
-        try
+        public string BuscarAllCorreos()
         {
-            conn.Open();
-            mydr = cmd.ExecuteReader();
-            if (mydr.HasRows)
+            string jsonStr = null;
+            Respuesta respuesta = new Respuesta();
+            List<object> list = new List<object>();
+            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnVeritas"].ToString());
+            string sql = "SELECT idCorreo,destino,sujeto,contenido,Estado_Correo.idEstadoCorreo,Estado_Correo.estadoCorreo,fechaRegistro,idUsuario FROM CORREOS inner join Estado_Correo on CORREOS.idEstadoCorreo = Estado_Correo.idEstadoCorreo order by fechaRegistro desc";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataReader mydr = null;
+            try
             {
-                while (mydr.Read())
+                conn.Open();
+                mydr = cmd.ExecuteReader();
+                if (mydr.HasRows)
                 {
-                    list.Add(new
+                    while (mydr.Read())
                     {
-                        IdCorreo = mydr["idCorreo"].ToString(),
-                        Destino = mydr["destino"].ToString(),
-                        EstadoCorreo = mydr["estadoCorreo"].ToString(),
-                        FechaRegistro = mydr["fechaRegistro"].ToString()
-                    });
+                        list.Add(new
+                        {
+                            IdCorreo = mydr["idCorreo"].ToString(),
+                            Destino = mydr["destino"].ToString(),
+                            Sujeto = mydr["sujeto"].ToString(),
+                            EstadoCorreo = mydr["estadoCorreo"].ToString(),
+                            FechaRegistro = mydr["fechaRegistro"].ToString()
+                        });
+                    }
+                }
+                if (list.Count > 0)
+                {
+                    respuesta = new Respuesta
+                    {
+                        Msg = string.Empty,
+                        Status = true,
+                        List = list
+                    };
+                    jsonStr = JsonConvert.SerializeObject(respuesta);
                 }
             }
-            if (list.Count > 0)
+            catch (Exception ex)
             {
-                respuesta = new object
+                respuesta = new Respuesta
                 {
-                    msg="",
-
+                    Msg = ex.Message,
+                    Status = false,
+                    List = list
                 };
-
-                jsonStr = JsonConvert.SerializeObject(list);
+                jsonStr = JsonConvert.SerializeObject(respuesta);
             }
+            finally
+            {
+                if (mydr != null) { mydr.Close(); mydr.Dispose(); cmd.Dispose(); }
+                if (conn != null) { conn.Close(); conn.Dispose(); }
+            }
+            return jsonStr;
         }
-        catch (Exception ex)
-        {
-            throw;
-        }
-        finally
-        {
-            if (mydr != null) { mydr.Close(); mydr.Dispose(); cmd.Dispose(); }
-            if (conn != null) { conn.Close(); conn.Dispose(); }
-        }
-        return jsonStr;
-    }
 
-    public Int64 InsertCorreo(string destino,string sujeto,string contenido, Int64 idUsuario)
-    {
-        Int64 id = 0;
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnGraduadoEgresado"].ConnectionString);
-        string sql = "insert into CORREOS (destino,sujeto,contenido,idUsuario) values (@destino,@sujeto,@contenido,@idUsuario);SELECT IDENT_CURRENT('CORREOS') as id";
-        SqlCommand cmd = new SqlCommand(sql, conn);
-        cmd.Parameters.AddWithValue("@destino", destino);
-        cmd.Parameters.AddWithValue("@sujeto", sujeto);
-        cmd.Parameters.AddWithValue("@contenido", contenido);
-        cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-        try
+        public string InsertCorreo(string destino, string sujeto, string contenido, Int64 idUsuario)
         {
-            conn.Open();
-            cmd.Dispose();
-            id = Convert.ToInt64(cmd.ExecuteScalar());
+            Int64 id = 0;
+            string jsonStr = null;
+            Respuesta respuesta = new Respuesta();
+            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnVeritas"].ConnectionString);
+            string sql = "insert into CORREOS (destino,sujeto,contenido,idUsuario) values (@destino,@sujeto,@contenido,@idUsuario);SELECT IDENT_CURRENT('CORREOS') as id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@destino", destino);
+            cmd.Parameters.AddWithValue("@sujeto", sujeto);
+            cmd.Parameters.AddWithValue("@contenido", contenido);
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+            try
+            {
+                conn.Open();
+                cmd.Dispose();
+                id = Convert.ToInt64(cmd.ExecuteScalar());
+                if (id > 0)
+                {
+                    respuesta = new Respuesta
+                    {
+                        Msg = "Correo agregado satisfactoriamente",
+                        Status = true,
+                        IdIdentidad = Convert.ToInt64(id)
+                    };
+                    jsonStr = JsonConvert.SerializeObject(respuesta);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                respuesta = new Respuesta
+                {
+                    Msg = ex.Message,
+                    Status = false,
+                    IdIdentidad = Convert.ToInt64(id)
+                };
+                jsonStr = JsonConvert.SerializeObject(respuesta);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+            return jsonStr;
         }
-        catch (Exception ex)
-        {
-            id = -1;
-        }
-        finally
-        {
-            conn.Close();
-            conn.Dispose();
-        }
-        return id;
     }
 }

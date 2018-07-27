@@ -28,15 +28,15 @@
     <form id="form1" runat="server">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Compose New Message</h3>
+                <h3 class="box-title">Envio de correo</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    <input class="form-control" placeholder="To:">
+                    <asp:TextBox ID="txtDestino" runat="server" CssClass="form-control" placeholder="Para:"></asp:TextBox>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Subject:">
+                    <asp:TextBox ID="txtAsunto" runat="server" CssClass="form-control" placeholder="Asunto:"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <ul class="wysihtml5-toolbar" style="">
@@ -114,7 +114,7 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <input class="bootstrap-wysihtml5-insert-link-target" checked="" type="checkbox">Open link in new window
-           
+
                                                 </label>
                                             </div>
                                         </div>
@@ -158,6 +158,7 @@
                             </a>
                         </li>
                     </ul>
+                    <asp:TextBox ID="txtContenido" runat="server" CssClass="form-control" Font-Underline="False" TextMode="MultiLine"></asp:TextBox>
                     <textarea id="compose-textarea" class="form-control" style="height: 300px; display: none;">                      &lt;h1&gt;&lt;u&gt;Heading Of Message&lt;/u&gt;&lt;/h1&gt;
                       &lt;h4&gt;Subheading&lt;/h4&gt;
                       &lt;p&gt;But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
@@ -183,22 +184,13 @@
                       &lt;p&gt;John Doe&lt;/p&gt;
                     </textarea><iframe class="wysihtml5-sandbox" security="restricted" allowtransparency="true" marginwidth="0" marginheight="0" style="background-color: rgb(255, 255, 255); border-collapse: separate; border-color: rgb(210, 214, 222); border-style: solid; border-width: 1px; clear: none; float: none; margin: 0px; outline: 0px none rgb(85, 85, 85); outline-offset: 0px; padding: 6px 12px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: text-bottom; text-align: start; box-sizing: border-box; box-shadow: none; border-radius: 0px; width: 100%; height: 300px; display: block;" width="0" height="0" frameborder="0"></iframe>
                 </div>
-                <div class="form-group">
-                    <div class="btn btn-default btn-file">
-                        <i class="fa fa-paperclip"></i>Attachment
-                 
-                        <input name="attachment" type="file">
-                    </div>
-                    <p class="help-block">Max. 32MB</p>
-                </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Draft</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i>Send</button>
+                    <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-default" Text="Cancelar" OnClick="btnCancelar_Click" />
+                    <asp:Button ID="btnEnviar" runat="server" CssClass="btn btn-primary" Text="Enviar" OnClick="btnEnviar_Click" />
                 </div>
-                <button type="reset" class="btn btn-default"><i class="fa fa-times"></i>Discard</button>
             </div>
             <!-- /.box-footer -->
         </div>
