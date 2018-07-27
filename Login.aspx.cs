@@ -20,28 +20,28 @@ public partial class Login : System.Web.UI.Page
         //}
 
     }
-    
+
     protected void btnLogin_Click(object sender, EventArgs e)
     {
 
-        if (this.txtUserName.Text == "Admin1"
-            )
+        if (this.txtUserName.Text == "Admin1")
         {
 
             if (this.txtPass.Value.Equals("Admin123456"))
             {
                 Session["userlogin"] = "1";
                 Response.Redirect("principal.aspx");
-               
+
             }
             else
             {
                 Response.Redirect("Login.aspx");
             }
         }
-        else {
+        else
+        {
             Response.Redirect("Login.aspx");
         }
-            
+
     }
 }
