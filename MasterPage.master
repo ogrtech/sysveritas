@@ -15,12 +15,13 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-
+    <script src="js/gridaccesorios.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -97,6 +98,8 @@ desired effect
                                                 <!-- Message title and timestamp -->
                                                 <h4>Support Team
                        
+                                                   
+
                                                     <small><i class="fa fa-clock-o"></i>5 mins</small>
                                                 </h4>
                                                 <!-- The message -->
@@ -154,6 +157,8 @@ desired effect
                                                 <!-- Task title and progress text -->
                                                 <h3>Design some buttons
                        
+                                                   
+
                                                     <small class="pull-right">20%</small>
                                                 </h3>
                                                 <!-- The progress bar -->
@@ -191,6 +196,8 @@ desired effect
                                     <p>
                                         Alexander Pierce - Web Developer
                  
+                                       
+
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
@@ -271,11 +278,11 @@ desired effect
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Donantes Empresas</a></li>
+                            <li><a href="rdonantesempresas.aspx"><i class="fa fa-circle-o"></i>Donantes Empresas</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i>Donantes Persona</a></li>
                         </ul>
                     </li>
-                    <li class="active"><a href="#"><i class="fa fa-envelope"></i><span>Correspondencia</span></a></li>
+                    <li class="active"><a href="email.aspx"><i class="fa fa-envelope"></i><span>Correspondencia</span></a></li>
                     <li class="active"><a href="#"><i class="fa fa-address-card-o"></i><span>Resportes</span></a></li>
                     <li><a href="outlogin.aspx"><i class="fa fa-lock"></i><span>Cerrar Sessión</span></a></li>
                 </ul>
@@ -287,28 +294,22 @@ desired effect
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <%--      <h1>
+            <%--<section class="content-header">
+                      <h1>
         Page Header
         <small>Optional description</small>
-      </h1>--%>
-                <%--      <ol class="breadcrumb">
+      </h1>
+                      <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
-      </ol>--%>
-            </section>
+      </ol>
+            </section>--%>
 
             <!-- Main content -->
             <section class="content container-fluid">
-
-
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    <%--                    <form id="form1" runat="server">
-                        <div>
-                        </div>
-                    </form>--%>
-                </asp:ContentPlaceHolder>
 
+                </asp:ContentPlaceHolder>
             </section>
             <!-- /.content -->
         </div>
@@ -324,11 +325,12 @@ desired effect
             <%--<strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.--%>
             <div class="copyright text-center" style="align-items: center">
                 &copy;Véritas
-                        <script type="text/javascript">
-                            //<![CDATA[
-                            var d = new Date()
-                            document.write(d.getFullYear())
-                            //]]>
+                       
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var d = new Date()
+                    document.write(d.getFullYear())
+                    //]]>
                         </script>
                 - <a href="http://fundacionveritas.org/">Fundación Véritas</a>
             </div>
