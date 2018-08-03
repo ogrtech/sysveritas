@@ -10,7 +10,6 @@ using System.Web.UI.WebControls;
 using BLL;
 using Entidades;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 public partial class index : System.Web.UI.Page
 {
@@ -18,17 +17,14 @@ public partial class index : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string json = correoBLL.BuscarAllCorreos();
-        Respuesta m = JsonConvert.DeserializeObject<Respuesta>(json);
-        List<object> records = m.List;
-
+        var jCorreo = JsonConvert.DeserializeObject<dynamic>(json);
+        
         var builder = new StringBuilder();
         builder.AppendLine("<table id='example2' class='table table-bordered table-striped table-hover'><thead><tr><th>ID</th><th>Destino</th><th>Asunto</th><th>Estado</th><th>Fecha Registro</th></tr></thead><tbody>");
-
-
-        foreach (JObject row in m.List)
+        
+        foreach (var row in jCorreo.List)
         {
-            //Type tipo = row.GetType();
-            builder.AppendLine("<tr><td>" + row["IdCorreo"].ToString() + "</td><td>" + row["Destino"].ToString() + "</td><td>" + row["Sujeto"].ToString() + "</td><td>" + row["EstadoCorreo"].ToString() + "</td><td>" + row["FechaRegistro"].ToString() + "</tr>");
+            builder.AppendLine("<tr><td>" + row.IdCorreo + "</td><td>" + row.Destino + "</td><td>" + row.Sujeto + "</td><td>" + row.EstadoCorreo + "</td><td>" + row.FechaRegistro + "</tr>");
         }
 
         builder.AppendLine("</tbody><tfoot><tr><th>ID</th><th>Destino</th><th>Asunto</th><th>Estado</th><th>Fecha Registro</th></tr></tfoot></table>");

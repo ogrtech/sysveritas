@@ -23,7 +23,7 @@ namespace DAL
         public string BuscarAllCorreos()
         {
             string jsonStr = null;
-            Respuesta respuesta = new Respuesta();
+            var respuesta = new object();
             List<object> list = new List<object>();
             SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnVeritas"].ToString());
             string sql = "SELECT idCorreo,destino,sujeto,contenido,Estado_Correo.idEstadoCorreo,Estado_Correo.estadoCorreo,fechaRegistro,idUsuario FROM CORREOS inner join Estado_Correo on CORREOS.idEstadoCorreo = Estado_Correo.idEstadoCorreo order by fechaRegistro desc";
@@ -49,7 +49,7 @@ namespace DAL
                 }
                 if (list.Count > 0)
                 {
-                    respuesta = new Respuesta
+                    respuesta = new
                     {
                         Msg = string.Empty,
                         Status = true,
@@ -60,7 +60,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                respuesta = new Respuesta
+                respuesta = new
                 {
                     Msg = ex.Message,
                     Status = false,
@@ -80,7 +80,7 @@ namespace DAL
         {
             Int64 id = 0;
             string jsonStr = null;
-            Respuesta respuesta = new Respuesta();
+            var respuesta = new object();
             SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnVeritas"].ConnectionString);
             string sql = "insert into CORREOS (destino,sujeto,contenido,idUsuario) values (@destino,@sujeto,@contenido,@idUsuario);SELECT IDENT_CURRENT('CORREOS') as id";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -95,7 +95,7 @@ namespace DAL
                 id = Convert.ToInt64(cmd.ExecuteScalar());
                 if (id > 0)
                 {
-                    respuesta = new Respuesta
+                    respuesta = new
                     {
                         Msg = "Correo agregado satisfactoriamente",
                         Status = true,
@@ -107,7 +107,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                respuesta = new Respuesta
+                respuesta = new
                 {
                     Msg = ex.Message,
                     Status = false,
