@@ -24,9 +24,9 @@ public partial class add : System.Web.UI.Page
 
     protected void btnEnviar_Click(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(txtDestino.Text) && !string.IsNullOrEmpty(txtAsunto.Text))
+        if (!string.IsNullOrEmpty(txtDestino.Text) && !string.IsNullOrEmpty(txtAsunto.Text) && !string.IsNullOrEmpty(__composetextarea.Text))
         {
-            string json = correoBLL.InsertCorreo(txtDestino.Text.Trim(), txtAsunto.Text.Trim(), txtContenido.Text.Trim(), 1);
+            string json = correoBLL.InsertCorreo(txtDestino.Text.Trim(), txtAsunto.Text.Trim(), __composetextarea.Text.Trim(), 1);
             var jCorreo = JsonConvert.DeserializeObject<dynamic>(json);
             bool status = Convert.ToBoolean(jCorreo.Status);
             if (status)
@@ -48,6 +48,6 @@ public partial class add : System.Web.UI.Page
     {
         txtDestino.Text = string.Empty;
         txtAsunto.Text = string.Empty;
-        txtContenido.Text = string.Empty;
+        __composetextarea.Text = string.Empty;
     }
 }
