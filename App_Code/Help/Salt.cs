@@ -7,22 +7,33 @@ using System.Web;
 /// <summary>
 /// Descripción breve de Salt
 /// </summary>
-public class Salt
+
+namespace Help
 {
-    public Salt()
+    public class Salt
     {
-        //
-        // TODO: Agregar aquí la lógica del constructor
-        //
-    }
+        public Salt()
+        {
+            //
+            // TODO: Agregar aquí la lógica del constructor
+            //
+        }
 
-    public static byte[] GenerateSalt()
-    {
-        RNGCryptoServiceProvider rncCsp = new RNGCryptoServiceProvider();
-        //        byte[] salt = new byte[SaltByteLength];
-        byte[] salt = new byte[32];
-        rncCsp.GetBytes(salt);
 
-        return salt;
+        public static string GenerateSaltHex()
+        {
+            byte[] salt = Salt.GenerateSalt(32);
+            return BitConverter.ToString(salt).Replace("-", "");
+        }
+
+        private static byte[] GenerateSalt(int SaltByteLength)
+        {
+            RNGCryptoServiceProvider rncCsp = new RNGCryptoServiceProvider();
+            byte[] salt = new byte[SaltByteLength];
+            //byte[] salt = new byte[32];
+            rncCsp.GetBytes(salt);
+
+            return salt;
+        }
     }
 }

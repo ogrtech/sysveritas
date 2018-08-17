@@ -8,62 +8,66 @@ using System.Web;
 /// <summary>
 /// Descripción breve de Seguridad
 /// </summary>
-public class Seguridad
+namespace Help
 {
-    public Seguridad()
+    public class Seguridad
     {
-        //
-        // TODO: Agregar aquí la lógica del constructor
-        //
-    }
-
-    public static string SHA512(string input)
-    {
-        var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-        using (var hash = System.Security.Cryptography.SHA512.Create())
+        public Seguridad()
         {
-            var hashedInputBytes = hash.ComputeHash(bytes);
-
-            var hashedInputStringBuilder = new System.Text.StringBuilder(128);
-            foreach (var b in hashedInputBytes)
-                hashedInputStringBuilder.Append(b.ToString("X2"));
-            return hashedInputStringBuilder.ToString();
+            //
+            // TODO: Agregar aquí la lógica del constructor
+            //
         }
-    }
 
-    public static string MD5Hash(string Data)
-    {
-        MD5 md5 = new MD5CryptoServiceProvider();
-        byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(Data));
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (byte b in hash)
+        public static string SHA512(string input)
         {
-            stringBuilder.AppendFormat("{0:x2}", b);
-        }
-        return stringBuilder.ToString();
-    }
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            using (var hash = System.Security.Cryptography.SHA512.Create())
+            {
+                var hashedInputBytes = hash.ComputeHash(bytes);
 
-    public static string SHA256Hash(string Data)
-    {
-        SHA256 sha = new SHA256Managed();
-        byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(Data));
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (byte b in hash)
-        {
-            stringBuilder.AppendFormat("{0:x2}", b);
+                var hashedInputStringBuilder = new System.Text.StringBuilder(128);
+                foreach (var b in hashedInputBytes)
+                    hashedInputStringBuilder.Append(b.ToString("X2"));
+                return hashedInputStringBuilder.ToString().ToLower();
+            }
         }
-        return stringBuilder.ToString();
-    }
 
-    public static string SHA384Hash(string Data)
-    {
-        SHA384 sha = new SHA384Managed();
-        byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(Data));
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (byte b in hash)
+        public static string MD5Hash(string Data)
         {
-            stringBuilder.AppendFormat("{0:x2}", b);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(Data));
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+            return stringBuilder.ToString();
         }
-        return stringBuilder.ToString();
+
+        public static string SHA256Hash(string Data)
+        {
+            SHA256 sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(Data));
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+            return stringBuilder.ToString();
+        }
+
+        public static string SHA384Hash(string Data)
+        {
+            SHA384 sha = new SHA384Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(Data));
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+            return stringBuilder.ToString();
+        }
     }
 }
+
